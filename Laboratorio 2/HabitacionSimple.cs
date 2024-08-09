@@ -14,6 +14,11 @@ namespace Laboratorio_2
         {
             NumeroCamas = numeroCamas;
         }
+        public override void MostrarHabitacion(List<Habitacion> habitacionesList)
+        {
+            base.MostrarHabitacion(habitacionesList);
+            Console.WriteLine($"\nNúmero de camas: {NumeroCamas}");
+        }
     }
 
 }

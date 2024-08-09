@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,11 +65,11 @@ namespace Laboratorio_2
                 Console.Write("Disponibilidad: ");
                 bool disponibilidadHabitacion = Convert.ToBoolean(Console.ReadLine());
                 string clienteAsignadoHabitacion = "";
-                if (disponibilidadHabitacion = true)
+                if (disponibilidadHabitacion == true)
                 {
                     clienteAsignadoHabitacion = "";
                 }
-                else if (disponibilidadHabitacion = false)
+                else if (disponibilidadHabitacion == false)
                 {
                     Console.Write("Cliente Asignado: ");
                     clienteAsignadoHabitacion = Console.ReadLine();
@@ -157,7 +158,7 @@ namespace Laboratorio_2
                 }
             }
         }
-        public void MostrarHabitacion(List<Habitacion> habitacionesList)
+        public virtual void MostrarHabitacion(List<Habitacion> habitacionesList)
         {
             if (habitacionesList.Count == 0)
             {
@@ -166,18 +167,10 @@ namespace Laboratorio_2
             }
             else
             {
-                Console.Write("Número de habitación: ");
-                int numeroHabitacion = int.Parse(Console.ReadLine());
-                Habitacion habitacionFind = habitacionesList.Find(p => p.Numero == numeroHabitacion);
-                if (habitacionFind != null)
-                {
-                    Console.WriteLine($"Nombre: {habitacionFind.Numero}\nPrecio: {habitacionFind.Precio}\nDisponibilidad: {habitacionFind.Disponible}\nCliente Asignado: {habitacionFind.ClienteAsignado}\nTipo: {habitacionFind.Tipo}");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("\n[!] Habitación Inexistente");
-                    Console.ReadKey();
+               foreach(var habitacion in habitacionesList)
+                    {
+                    Console.WriteLine($"Número de habitación: ¨{habitacion.Numero}\nPrecio: {habitacion.Precio}\nDisponibilidad: {habitacion.Disponible}\nCliente Asignado: {habitacion.ClienteAsignado}\nTipo: {habitacion.Tipo}");
+
                 }
             }
         }
@@ -193,6 +186,7 @@ namespace Laboratorio_2
                 habitacionFind.ClienteAsignado = clienteAsignado;
                 habitacionFind.Disponible = false;
                 Console.WriteLine("\n[!] Cliente Agregado");
+                Console.ReadKey();
             }
             else
             {
@@ -218,5 +212,12 @@ namespace Laboratorio_2
                 Console.ReadKey();
             }
         }
+        public bool Disponibilidad()
+        {
+            Console.Write("Disponibilidad: ");
+            string disponibilidadString = Console.ReadLine().ToLower();
+                bool disponibilidadHabitacion = Convert.ToBoolean(Console.ReadLine());
+            return disponibilidadHabitacion;
+    }
     }
 }

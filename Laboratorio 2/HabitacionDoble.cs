@@ -13,5 +13,10 @@ namespace Laboratorio_2
         {
             VistaMar = vistaMar;
         }
+        public override void MostrarHabitacion(List<Habitacion> habitacionesList)
+        {
+            base.MostrarHabitacion(habitacionesList);
+            Console.WriteLine($"\nVista al Mar: {VistaMar}");
+        }
     }
 }

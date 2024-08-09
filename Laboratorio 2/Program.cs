@@ -15,21 +15,29 @@ do
                 break;
             case 2:
                 hotel.EliminarHabitacion(HabitacionesList);
+                Console.ReadKey();
                 break;
             case 3:
                 hotel.MostrarHabitacion(HabitacionesList);
+                Console.ReadKey();
                 break;
             case 4:
                 hotel.AsignarHabitacion(HabitacionesList);
+                Console.ReadKey();
                 break;
             case 5:
                 hotel.LiberarHabitacion(HabitacionesList);
+                Console.ReadKey();
                 break;
             case 6:
-
+                Console.Clear();
+                Console.WriteLine("Saliendo...");
+                Console.ReadKey();
+                run = false;
                 break;
             default:
                 Console.WriteLine("Ingrese una opción válida");
+                Console.ReadKey();
                 break;
         }
     }

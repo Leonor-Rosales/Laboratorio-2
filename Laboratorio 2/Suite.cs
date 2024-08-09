@@ -15,6 +15,11 @@ namespace Laboratorio_2
             NumeroHabitaciones = numeroHabitaciones;
             Jaccuzi = jaccuzi;
         }
+        public override void MostrarHabitacion(List<Habitacion> habitacionesList)
+        {
+            base.MostrarHabitacion(habitacionesList);
+            Console.WriteLine($"\nNúmero de Habitaciones: {NumeroHabitaciones}\nJaccuzi: {Jaccuzi}");
+        }
     }
     
 }
