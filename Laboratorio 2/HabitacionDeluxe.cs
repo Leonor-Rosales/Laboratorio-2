@@ -9,7 +9,7 @@ namespace Laboratorio_2
     internal class HabitacionDeluxe : Habitacion
     {
         public string Servicios { get; set; }
-        public HabitacionDeluxe(int numero, double precio, bool disponible, string clienteAsignado, string servicios) : base(numero, precio, disponible, clienteAsignado)
+        public HabitacionDeluxe(int numero, double precio, bool disponible, string clienteAsignado, string tipo, string servicios) : base(numero, precio, disponible, clienteAsignado, tipo)
         {
             Servicios = servicios;
         }
