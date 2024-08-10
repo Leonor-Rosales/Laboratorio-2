@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Laboratorio_2
 {
-    internal class Habitacion 
+    internal class Habitacion
     {
         public int Numero { get; set; }
         public double Precio { get; set; }
@@ -53,7 +53,7 @@ namespace Laboratorio_2
             Console.WriteLine("4. Habitación Deluxe");
             Console.Write("Ingrese una opción: ");
         }
-        public void AgregarDatos(List<Habitacion> habitacionesList)       
+        public void AgregarDatos(List<Habitacion> habitacionesList)
         {
             try
             {
@@ -62,19 +62,7 @@ namespace Laboratorio_2
                 int numeroHabitacion = int.Parse(Console.ReadLine());
                 Console.Write("Precio de habitación: ");
                 double precioHabitación = int.Parse(Console.ReadLine());
-                Console.Write("Disponibilidad: ");
-                bool disponibilidadHabitacion = Convert.ToBoolean(Console.ReadLine());
-                string clienteAsignadoHabitacion = "";
-                if (disponibilidadHabitacion == true)
-                {
-                    clienteAsignadoHabitacion = "";
-                }
-                else if (disponibilidadHabitacion == false)
-                {
-                    Console.Write("Cliente Asignado: ");
-                    clienteAsignadoHabitacion = Console.ReadLine();
-                }
-                if ((precioHabitación > 0) & (numeroHabitacion >= 0)) 
+                if ((precioHabitación > 0) && (numeroHabitacion >= 0))
                 {
                     MenuHabitaciones();
                     int option = int.Parse(Console.ReadLine());
@@ -85,15 +73,15 @@ namespace Laboratorio_2
                             tipoHabitacion = "Simple";
                             Console.Write("Número de camas: ");
                             int camasHabitacion = int.Parse(Console.ReadLine());
-                            habitacionesList.Add(new HabitacionSimple(numeroHabitacion, precioHabitación, disponibilidadHabitacion, clienteAsignadoHabitacion, tipoHabitacion, camasHabitacion));
+                            habitacionesList.Add(new HabitacionSimple(numeroHabitacion, precioHabitación, true, "", tipoHabitacion, camasHabitacion));
                             Console.WriteLine("\nHabitación Añadida con Éxito");
                             Console.ReadKey();
                             break;
                         case 2:
                             tipoHabitacion = "Doble";
-                            Console.Write("Vista al mar: ");
-                            bool vistaMar = Convert.ToBoolean(Console.ReadLine());
-                            habitacionesList.Add(new HabitacionDoble(numeroHabitacion, precioHabitación, disponibilidadHabitacion, clienteAsignadoHabitacion, tipoHabitacion, vistaMar));
+                            Console.Write("Vista al mar (Incluido/No Incluido): ");
+                            string vistaMar = Console.ReadLine();
+                            habitacionesList.Add(new HabitacionDoble(numeroHabitacion, precioHabitación, true, "", tipoHabitacion, Enmascararbooleano(vistaMar)));
                             Console.WriteLine("\nHabitación Añadida con Éxito");
                             Console.ReadKey();
                             break;
@@ -101,9 +89,9 @@ namespace Laboratorio_2
                             tipoHabitacion = "Suite";
                             Console.Write("Número de habitaciones: ");
                             int numeroHabitaciones = int.Parse(Console.ReadLine());
-                            Console.Write("Jacuzzi: ");
-                            bool jaccuzi = Convert.ToBoolean(Console.ReadLine());
-                            habitacionesList.Add(new Suite(numeroHabitacion, precioHabitación, disponibilidadHabitacion, clienteAsignadoHabitacion, tipoHabitacion, numeroHabitaciones, jaccuzi));
+                            Console.Write("Jacuzzi (Incluido/No Incluido): ");
+                            string jaccuzi = Console.ReadLine();
+                            habitacionesList.Add(new Suite(numeroHabitacion, precioHabitación, true, "", tipoHabitacion, numeroHabitaciones, Enmascararbooleano(jaccuzi)));
                             Console.WriteLine("\nHabitación Añadida con Éxito");
                             Console.ReadKey();
                             break;
@@ -111,7 +99,7 @@ namespace Laboratorio_2
                             tipoHabitacion = "Deluxe";
                             Console.Write("Servicios: ");
                             string servicios = Console.ReadLine();
-                            habitacionesList.Add(new HabitacionDeluxe(numeroHabitacion, precioHabitación, disponibilidadHabitacion, clienteAsignadoHabitacion, tipoHabitacion, servicios));
+                            habitacionesList.Add(new HabitacionDeluxe(numeroHabitacion, precioHabitación, true, "", tipoHabitacion, servicios));
                             Console.WriteLine("\nHabitación Añadida con Éxito");
                             Console.ReadKey();
                             break;
@@ -119,7 +107,7 @@ namespace Laboratorio_2
                             Console.WriteLine("Ingrese una opción válida");
                             Console.ReadKey();
                             break;
-                    }                   
+                    }
                 }
                 else
                 {
@@ -158,7 +146,7 @@ namespace Laboratorio_2
                 }
             }
         }
-        public virtual void MostrarHabitacion(List<Habitacion> habitacionesList)
+        public void MostrarTodasHabitaciones(List<Habitacion> habitacionesList)
         {
             if (habitacionesList.Count == 0)
             {
@@ -167,12 +155,17 @@ namespace Laboratorio_2
             }
             else
             {
-               foreach(var habitacion in habitacionesList)
-                    {
-                    Console.WriteLine($"Número de habitación: ¨{habitacion.Numero}\nPrecio: {habitacion.Precio}\nDisponibilidad: {habitacion.Disponible}\nCliente Asignado: {habitacion.ClienteAsignado}\nTipo: {habitacion.Tipo}");
-
+                foreach (var habitacion in habitacionesList)
+                {
+                    habitacion.MostrarHabitacion();
+                    Console.WriteLine("");
                 }
             }
+        }
+        public virtual void MostrarHabitacion()
+        {
+            Console.WriteLine($"--- Habitación Número {Numero} ---");
+            Console.WriteLine($"Precio: {Precio}\nDisponibilidad: {Enmascarar(Disponible)}\nCliente Asignado: {ClienteAsignado}\nTipo: {Tipo}");
         }
         public void AsignarHabitacion(List<Habitacion> habitacionList)
         {
@@ -201,7 +194,7 @@ namespace Laboratorio_2
             Habitacion habitacionFind = habitacionList.Find(p => p.Numero == habitacionNumero);
             if (habitacionNumero != null)
             {
-                
+
                 habitacionFind.ClienteAsignado = "";
                 habitacionFind.Disponible = true;
                 Console.WriteLine("\n[!] Habitación Liberada");
@@ -212,12 +205,39 @@ namespace Laboratorio_2
                 Console.ReadKey();
             }
         }
-        public bool Disponibilidad()
+        public string EnmascararDisponible(bool disponibilidad)
         {
-            Console.Write("Disponibilidad: ");
-            string disponibilidadString = Console.ReadLine().ToLower();
-                bool disponibilidadHabitacion = Convert.ToBoolean(Console.ReadLine());
-            return disponibilidadHabitacion;
-    }
+            if (disponibilidad == true)
+            {
+                return "Disponible";
+            }
+            else
+            {
+                return "No disponible";
+            }
+        }
+        public string Enmascarar(bool textoEnmascarado)
+        {
+            if (textoEnmascarado == true)
+            {
+                return "Incluido";
+            }
+            else
+            {
+                return "No incluido";
+            }
+        }
+        public bool Enmascararbooleano(string textoEnmascarado)
+        {
+            if (textoEnmascarado == "incluido")
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

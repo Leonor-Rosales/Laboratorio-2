@@ -13,10 +13,10 @@ namespace Laboratorio_2
         {
             VistaMar = vistaMar;
         }
-        public override void MostrarHabitacion(List<Habitacion> habitacionesList)
+        public override void MostrarHabitacion()
         {
-            base.MostrarHabitacion(habitacionesList);
-            Console.WriteLine($"\nVista al Mar: {VistaMar}");
+            base.MostrarHabitacion();
+            Console.WriteLine($"Vista al Mar: {Enmascarar(VistaMar)}");
         }
     }
 }

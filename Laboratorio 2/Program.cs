@@ -18,7 +18,7 @@ do
                 Console.ReadKey();
                 break;
             case 3:
-                hotel.MostrarHabitacion(HabitacionesList);
+                hotel.MostrarTodasHabitaciones(HabitacionesList);
                 Console.ReadKey();
                 break;
             case 4:

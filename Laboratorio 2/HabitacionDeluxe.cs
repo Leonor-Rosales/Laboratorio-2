@@ -13,10 +13,10 @@ namespace Laboratorio_2
         {
             Servicios = servicios;
         }
-        public override void MostrarHabitacion(List<Habitacion> habitacionesList)
+        public override void MostrarHabitacion()
         {
-            base.MostrarHabitacion(habitacionesList);
-            Console.WriteLine($"\nServicios: {Servicios}");
+            base.MostrarHabitacion();
+            Console.WriteLine($"Servicios: {Servicios}");
         }
     }
 }

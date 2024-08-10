@@ -9,16 +9,16 @@ namespace Laboratorio_2
     internal class Suite : Habitacion
     {
         public int NumeroHabitaciones { get; set; }
-        public bool Jaccuzi { get; set; }
-        public Suite(int numero, double precio, bool disponible, string clienteAsignado, string tipo, int numeroHabitaciones, bool jaccuzi) : base(numero, precio, disponible, clienteAsignado, tipo)
+        public bool Jacuzzi { get; set; }
+        public Suite(int numero, double precio, bool disponible, string clienteAsignado, string tipo, int numeroHabitaciones, bool jacuzzi) : base(numero, precio, disponible, clienteAsignado, tipo)
         {
             NumeroHabitaciones = numeroHabitaciones;
-            Jaccuzi = jaccuzi;
+            Jacuzzi = jacuzzi;
         }
-        public override void MostrarHabitacion(List<Habitacion> habitacionesList)
+        public override void MostrarHabitacion()
         {
-            base.MostrarHabitacion(habitacionesList);
-            Console.WriteLine($"\nNúmero de Habitaciones: {NumeroHabitaciones}\nJaccuzi: {Jaccuzi}");
+            base.MostrarHabitacion();
+            Console.WriteLine($"Número de Habitaciones: {NumeroHabitaciones}\nJaccuzi: {Enmascarar(Jacuzzi)}");
         }
     }
     
